@@ -105,9 +105,9 @@ function GM:AddDeathNotice( attacker, team1, inflictor, victim, team2 )
 
 		local pnl = vgui.Create( "GameNotice", g_DeathNotify )
 
-		pnl:AddText( attacker or "", GAMEMODE:GetTeamNumColor(attackerTeam) )
+		pnl:AddText( attacker or "", GAMEMODE:GetTeamNumColor(team1) )
 		pnl:AddIcon( inflictor )
-		pnl:AddText( victim or "", GAMEMODE:GetTeamNumColor(victimTeam) )
+		pnl:AddText( victim or "", GAMEMODE:GetTeamNumColor(team2) )
 
 		g_DeathNotify:AddItem( pnl )
 
