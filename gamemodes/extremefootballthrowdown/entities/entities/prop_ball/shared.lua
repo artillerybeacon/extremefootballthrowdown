@@ -232,7 +232,7 @@ function ENT:SetCarrier(ent)
 		if phys:IsValid() then phys:EnableMotion(false) end
 		self:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
 
-		GAMEMODE:BroadcastAction(ent:Name(), "picked up the ball!")
+		GAMEMODE:BroadcastAction(ent:Name(), "picked up the ball!", entteam)
 
 		self:CallStateFunction("PickedUp", ent)
 
