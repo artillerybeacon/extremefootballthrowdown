@@ -671,11 +671,15 @@ function BroadcastLua(lua)
 	end
 end
 
-function GM:BroadcastAction(subject, action)
+function GM:BroadcastAction(subject, action, teamnum)
 	if type(subject) == "string" then
-		BroadcastLua(string.format("GAMEMODE:AddPlayerAction(%q, %q)", subject, action))
+		if teamnum then
+			BroadcastLua(string.format("GAMEMODE:AddTeamPlayerAction(%q, %q, %i)", subject, action, teamnum))
+		else
+			BroadcastLua(string.format("GAMEMODE:AddPlayerAction(%q, %q)", subject, action))
+		end
 	else
-		BroadcastLua(string.format("GAMEMODE:AddPlayerAction(Entity("..subject:EntIndex().."), %q)", action))
+		BroadcastLua(string.format("GAMEMODE:AddPlayerAction(Entity("..subject:EntIndex().."), %q )", action))
 	end
 end
 
