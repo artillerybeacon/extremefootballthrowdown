@@ -228,7 +228,7 @@ function ENT:Touch(ent)
 	if ent:IsPlayer() and not self:GetCarrier():IsValid() and ent:Alive() and not ent:IsCarrying() and not GAMEMODE:IsWarmUp()
 	and ent:CallStateFunction("CanPickup", self) and (self:GetLastCarrier() ~= ent or CurTime() > (self.m_PickupImmunity or 0))
 	and (ent:Team() ~= self:GetLastCarrierTeam() or CurTime() > (self.m_TeamPickupImmunity or 0)) then
-		if team.HasPlayers(ent:Team() == TEAM_RED and TEAM_BLUE or TEAM_RED) then
+		if team.HasPlayers(ent:Team() == TEAM_RED and TEAM_BLUE or TEAM_RED) or game.MaxPlayers() == 1 then
 			self:SetCarrier(ent)
 			ent:AddFrags(5)
 
@@ -266,10 +266,10 @@ function ENT:Drop(throwforce, suicide)
 		end
 
 		if throwforce then
-			GAMEMODE:BroadcastAction(carrier:Name(), "threw the ball!")
+			GAMEMODE:BroadcastAction(carrier:Name(), "threw the ball!", carrier:Team())
 			self.m_TeamPickupImmunity = CurTime() + 0.25
 		else
-			GAMEMODE:BroadcastAction(carrier:Name(), "dropped the ball!")
+			GAMEMODE:BroadcastAction(carrier:Name(), "dropped the ball!", carrier:Team())
 		end
 	end
 
